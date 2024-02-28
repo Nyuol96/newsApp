@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:newsapp/models/article_model.dart';
 
 class NewsTile extends StatelessWidget {
-  const NewsTile({super.key});
-
+  const NewsTile({super.key, required this.articleModel});
+  final ArticleModel articleModel;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -10,8 +11,8 @@ class NewsTile extends StatelessWidget {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(6),
-          child: Image.asset(
-            'Assets/sportsnews.jpg',
+          child: Image.network(
+            articleModel.image!,
             height: 200,
             width: double.infinity,
             fit: BoxFit.cover,
@@ -21,7 +22,7 @@ class NewsTile extends StatelessWidget {
           height: 15,
         ),
         Text(
-          'Manchester United Droped a Defensive Master Class against Liverpool at Anfield',
+          articleModel.title,
           style: TextStyle(
               overflow: TextOverflow.ellipsis,
               fontSize: 22,
@@ -32,7 +33,8 @@ class NewsTile extends StatelessWidget {
           height: 15,
         ),
         Text(
-          'Manchester United Droped a Defensive Master Class against Liverpool at Anfield',
+          articleModel.subTitle ?? '',
+          maxLines: 2,
           style: TextStyle(fontSize: 12, color: Colors.grey),
         ),
       ],
