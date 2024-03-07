@@ -1,6 +1,10 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:newsapp/Services/news_service.dart';
+import 'package:newsapp/models/article_model.dart';
 import 'package:newsapp/widgets/categorieslistview.dart';
 import 'package:newsapp/widgets/news_list_View.dart';
+import 'package:newsapp/widgets/news_list_view_builder.dart';
 import 'package:newsapp/widgets/news_tile.dart';
 
 class HomeView extends StatelessWidget {
@@ -38,7 +42,7 @@ class HomeView extends StatelessWidget {
               SliverToBoxAdapter(
                 child: SizedBox(height: 32),
               ),
-              NewsListView(),
+              newslistviewbuilder(),
             ],
           ),
           // child: Column(
