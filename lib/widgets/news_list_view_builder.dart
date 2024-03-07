@@ -5,35 +5,37 @@ import 'package:newsapp/models/article_model.dart';
 import 'package:newsapp/widgets/news_list_View.dart';
 
 class newslistviewbuilder extends StatefulWidget {
-  newslistviewbuilder({
-    super.key,
-  });
+  const newslistviewbuilder({super.key});
 
   @override
   State<newslistviewbuilder> createState() => _newslistviewbuilderState();
 }
 
 class _newslistviewbuilderState extends State<newslistviewbuilder> {
-  List<ArticleModel> articles = [];
+  var future;
   @override
-  bool isLoading = true;
-  void initState() {
+  void initstate() {
     super.initState();
-    generalNews();
-  }
-
-  Future<void> generalNews() async {
-    articles = await NewsServivce(Dio()).getNews();
-    isLoading = false;
-    setState(() {});
+    future = NewsServivce(Dio()).getNews();
   }
 
   @override
   Widget build(BuildContext context) {
-    return isLoading
-        ? SliverToBoxAdapter(child: Center(child: CircularProgressIndicator()))
-        : NewsListView(
-            articles: articles,
-          );
+    return FutureBuilder<List<ArticleModel>>(
+        future: future,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return NewsListView(
+              articles: snapshot.data!,
+            );
+          } else if (snapshot.hasError) {
+            return const SliverToBoxAdapter(
+              child: Text('Oops there was an error'),
+            );
+          } else {
+            return SliverToBoxAdapter(
+                child: Center(child: CircularProgressIndicator()));
+          }
+        });
   }
 }
