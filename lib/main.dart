@@ -4,7 +4,6 @@ import 'package:newsapp/Services/news_service.dart';
 import 'package:newsapp/screens/homeView.dart';
 
 void main() {
-  NewsServivce(Dio()).getNews();
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const NewsApp());
 }
