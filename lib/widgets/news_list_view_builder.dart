@@ -5,10 +5,12 @@ import 'package:newsapp/models/article_model.dart';
 import 'package:newsapp/widgets/news_list_View.dart';
 
 class newslistviewbuilder extends StatefulWidget {
-  const newslistviewbuilder({super.key});
+  const newslistviewbuilder({super.key, required this.category});
 
   @override
   State<newslistviewbuilder> createState() => _newslistviewbuilderState();
+
+  final String category;
 }
 
 class _newslistviewbuilderState extends State<newslistviewbuilder> {
@@ -16,7 +18,7 @@ class _newslistviewbuilderState extends State<newslistviewbuilder> {
   @override
   void initstate() {
     super.initState();
-    future = NewsServivce(Dio()).getTopHeadlines(category: 'general');
+    future = NewsServivce(Dio()).getTopHeadlines(category: widget.category);
   }
 
   @override

@@ -42,7 +42,9 @@ class HomeView extends StatelessWidget {
               SliverToBoxAdapter(
                 child: SizedBox(height: 32),
               ),
-              newslistviewbuilder(),
+              newslistviewbuilder(
+                category: 'general',
+              ),
             ],
           ),
           // child: Column(
